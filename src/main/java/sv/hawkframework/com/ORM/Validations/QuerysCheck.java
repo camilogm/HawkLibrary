@@ -4,12 +4,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import sv.hawkframework.com.ORM.QueryConverter.Interfaces.IConexion;
+import sv.hawkframework.com.factory.connections.DataBaseConnection;
+import sv.hawkframework.com.factory.connections.MySqlConnection;
 
 public class QuerysCheck {
 
 	
-	private IConexion conn;
+	private DataBaseConnection conn = MySqlConnection.getInstance();
 	
 	
 	/**

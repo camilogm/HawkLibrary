@@ -28,7 +28,7 @@ public class TablesDataProperties {
 	   * @throws NullPointerException
 	   * 
 	   */
-      public String getTableName(Object object) throws NullPointerException{
+      public static String getTableName(Object object) throws NullPointerException{
         
         
             
@@ -50,7 +50,7 @@ public class TablesDataProperties {
        * @throws NullPointerException
        */
       
-      public String getIdName(Object object) throws NullPointerException{
+      public static String getIdName(Object object) throws NullPointerException{
         
               
               Class<? extends Object> classProperties = object.getClass();

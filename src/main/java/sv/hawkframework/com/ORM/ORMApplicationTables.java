@@ -3,7 +3,14 @@ package sv.hawkframework.com.ORM;
 import java.util.ArrayList;
 
 import sv.hawkframework.com.ORM.Interfaces.*;
-import sv.hawkframework.com.ORM.QueryConverter.Interfaces.*;
+import sv.hawkframework.com.ORM.MySQLConverter.Count;
+import sv.hawkframework.com.ORM.MySQLConverter.Delete;
+import sv.hawkframework.com.ORM.MySQLConverter.Find;
+import sv.hawkframework.com.ORM.MySQLConverter.FindMany;
+import sv.hawkframework.com.ORM.MySQLConverter.Insert;
+import sv.hawkframework.com.ORM.MySQLConverter.Update;
+import sv.hawkframework.com.ORM.QueryOperations.*;
+
 
 
 
@@ -11,12 +18,12 @@ public class  ORMApplicationTables<T> implements IOperations<Object>,IFindOperat
 
 
 
-	private IInsert insert;
-	private IUpdate update;
-	private IDelete delete;
-	private IFind find;
-	private IFindMany findMany;
-	private ICount count;
+	private IInsert insert = Insert.getInstance();
+	private IUpdate update = Update.getInstance();
+	private IDelete delete = Delete.getInstance();
+	private IFind find = Find.getInstance();
+	private IFindMany findMany = FindMany.getInstance();
+	private ICount count = Count.getInstance();
 	
 	
 	

@@ -11,13 +11,12 @@ import java.sql.SQLException;
 import sv.hawkframework.com.ORM.TablesDataProperties;
 import sv.hawkframework.com.ORM.Annotations.NotDuplicated;
 import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
-import sv.hawkframework.com.ORM.Exceptions.NotDuplicatedException;
 import sv.hawkframework.com.ORM.Validations.Interfaces.INotDuplicatedField;
+import sv.hawkframework.com.validators.NotDuplicatedException;
 
 public class NotDuplicatedOnInsertOrUpdate implements INotDuplicatedField{
 
-	private TablesDataProperties tableData;
-	private QuerysCheck querysCheck;
+	private QuerysCheck querysCheck = new QuerysCheck();;
 	
 	public NotDuplicatedOnInsertOrUpdate() {
 		
@@ -37,8 +36,8 @@ public class NotDuplicatedOnInsertOrUpdate implements INotDuplicatedField{
 	    		
 		
 
-		 String tableName=tableData.getTableName(object);
-		 String idName=tableData.getIdName(object);
+		 String tableName=TablesDataProperties.getTableName(object);
+		 String idName=TablesDataProperties.getIdName(object);
 		 String primaryKeyValue=null;
 			 
 			 
