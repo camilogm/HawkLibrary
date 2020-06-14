@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * 
  * @author Camilo Gonzalez
  * @version 1.0
- * @apiNote for use this annotation is mandatatory that the propertie in the class has a original get method
+ * @apiNote for use this annotation is mandatatory that the properties in the class has a original get method
  */
 
 @Target({FIELD,PARAMETER, })

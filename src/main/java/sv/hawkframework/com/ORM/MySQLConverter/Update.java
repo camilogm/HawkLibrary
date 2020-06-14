@@ -6,16 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
 
 import com.google.gson.JsonObject;
 
 import sv.hawkframework.com.ORM.TablesDataProperties;
 import sv.hawkframework.com.ORM.QueryOperations.IJsonConvert;
 import sv.hawkframework.com.ORM.QueryOperations.IUpdate;
+import sv.hawkframework.com.ORM.Validations.NotDuplicatedOnInsertOrUpdate;
 import sv.hawkframework.com.ORM.Validations.Interfaces.INotDuplicatedField;
-import sv.hawkframework.com.factory.connections.DataBaseConnection;
-import sv.hawkframework.com.factory.connections.MySqlConnection;
+import sv.hawkframework.com.connections.DataBaseConnection;
+import sv.hawkframework.com.connections.MySqlConnection;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.Logger;
+import sv.hawkframework.loggers.NoLogger;
 
 public class Update  implements IUpdate  {
 
@@ -23,9 +26,10 @@ public class Update  implements IUpdate  {
 	
 	protected DataBaseConnection conn = MySqlConnection.getInstance();
 	protected IJsonConvert jsonConvert = new JsonConvert();
-	private final static Logger logger=Logger.getLogger(Update.class);
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
+
 	
-	private INotDuplicatedField notDuplicatedValidation;
+	private INotDuplicatedField notDuplicatedValidation = new NotDuplicatedOnInsertOrUpdate();
 	private static Update update;
 	
 	private Update() {
@@ -40,7 +44,7 @@ public class Update  implements IUpdate  {
 	}
 	
 	@Override
-	public Boolean update(Object object)  {
+	public Boolean update(Object object) throws SQLException  {
 		
 		   try {
 			notDuplicatedValidation.notDuplicatedValidationInsert(object, Boolean.TRUE);
@@ -76,21 +80,16 @@ public class Update  implements IUpdate  {
 	       query=query.replace("\"", "");
 	       query=query+" WHERE "+idName+"='"+id+"'";
 	       
-	       try {   
+	        
 	    	   
-	    	   logger.info(query);
-		       PreparedStatement ps=this.conn.getConnection().prepareStatement(query);
-		       for (int i = 0; i < values.size(); i++) {
-				   ps.setString(i+1, values.get(i).replace("\"",""));
-		       }
-		       ps.execute();		       
-		       return true;
-		   }
-	       catch(SQLException e) {	    	   
-	    	   logger.error(e.getMessage(),e.fillInStackTrace());
+    	   logger.info(query);
+	       PreparedStatement ps=this.conn.getConnection().prepareStatement(query);
+	       for (int i = 0; i < values.size(); i++) {
+			   ps.setString(i+1, values.get(i).replace("\"",""));
 	       }
-	       
-	       return false;
+	       ps.execute();		       
+	       return true;
+
 	}
 
 }

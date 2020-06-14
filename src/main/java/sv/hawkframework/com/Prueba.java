@@ -1,20 +1,23 @@
 package sv.hawkframework.com;
 
 import sv.hawkframework.com.ORM.Annotations.DataModelAnnotations;
+import sv.hawkframework.com.ORM.Annotations.NotDuplicated;
 import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
 
-@DataModelAnnotations(tableName = "departamento")
-public class Departamento {
+@DataModelAnnotations(tableName = "Prueba")
+public class Prueba {
 	
 	@PrimaryKey
 	private Integer id;
+	@NotDuplicated
 	private String codigo;
+	@NotDuplicated
 	private String nombre;
 	
-	public Departamento() {
+	public Prueba() {
 		
 	}
-	public Departamento(Integer id, String codigo, String nombre) {
+	public Prueba(Integer id, String codigo, String nombre) {
 		this.id = id;
 		this.codigo = codigo;
 		this.nombre = nombre;

@@ -7,6 +7,7 @@ import java.util.List;
  * 
  * @author Camilo González
  * @return a Exception with the fields that are duplicated in the database
+ * @version 0.01
  */
 public class NotDuplicatedException extends RuntimeException {
 

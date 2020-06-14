@@ -13,8 +13,8 @@ import com.google.gson.JsonObject;
 import sv.hawkframework.com.ORM.QueryOperations.IJsonConvert;
 import sv.hawkframework.com.ORM.Validations.ValidationTypes;
 import sv.hawkframework.com.ORM.Validations.Interfaces.IValidationTypes;
-import sv.hawkframework.com.factory.connections.DataBaseConnection;
-import sv.hawkframework.com.factory.connections.MySqlConnection;
+import sv.hawkframework.com.connections.DataBaseConnection;
+import sv.hawkframework.com.connections.MySqlConnection;
 
 public class JsonConvert  implements IJsonConvert {
 

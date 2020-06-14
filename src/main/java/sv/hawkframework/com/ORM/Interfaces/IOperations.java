@@ -1,11 +1,12 @@
 package sv.hawkframework.com.ORM.Interfaces;
 
+import java.sql.SQLException;
 
 public interface IOperations<T> {
 
-	Boolean addAndSave();
-	void updateAndSave();
-	Boolean deleteAndSave();
+	Boolean addAndSave() throws SQLException;
+	void updateAndSave() throws SQLException;
+	Boolean deleteAndSave() throws SQLException;
 	Boolean deleteAndSave(Object[][] conditions);
 	
 	

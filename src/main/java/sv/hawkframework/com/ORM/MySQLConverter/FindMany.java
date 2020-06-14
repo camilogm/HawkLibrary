@@ -3,20 +3,23 @@ package sv.hawkframework.com.ORM.MySQLConverter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
 import sv.hawkframework.com.ORM.QueryOperations.IConstructortSelect;
 import sv.hawkframework.com.ORM.QueryOperations.IFindMany;
 import sv.hawkframework.com.ORM.QueryOperations.IJsonConvert;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.Logger;
+import sv.hawkframework.loggers.NoLogger;
 
 public class FindMany  implements IFindMany{
 
 	protected IConstructortSelect constructorSelect = new ConstructorSelect();
 	protected IJsonConvert jsonConvert = new JsonConvert();
 	
-	private static final Logger logger=Logger.getLogger(FindMany.class);
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
+
 	private static FindMany findMany;
 	
 	private FindMany() {

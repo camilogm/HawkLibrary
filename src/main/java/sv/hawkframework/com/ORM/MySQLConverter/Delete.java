@@ -4,22 +4,26 @@ import java.lang.reflect.Field;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
 
 import sv.hawkframework.com.ORM.TablesDataProperties;
 import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
 import sv.hawkframework.com.ORM.QueryOperations.IConditionsConstructor;
 import sv.hawkframework.com.ORM.QueryOperations.IDelete;
 import sv.hawkframework.com.ORM.Validations.GettersSetters;
-import sv.hawkframework.com.factory.connections.DataBaseConnection;
-import sv.hawkframework.com.factory.connections.MySqlConnection;
+import sv.hawkframework.com.connections.DataBaseConnection;
+import sv.hawkframework.com.connections.MySqlConnection;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.Logger;
+import sv.hawkframework.loggers.NoLogger;
+
 
 public class Delete implements IDelete {
 
 	private DataBaseConnection conn = MySqlConnection.getInstance();
 	private IConditionsConstructor conditionsConstructor;
 	
-	private static final Logger logger=Logger.getLogger(Find.class);
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
+
 	private static Delete delete;
 	
 	private Delete() {
@@ -37,7 +41,7 @@ public class Delete implements IDelete {
 	
 	
 	@Override
-	public Boolean delete(Object object) {
+	public Boolean delete(Object object) throws SQLException {
 
 		String tableName=TablesDataProperties.getTableName(object);
 		String idName=TablesDataProperties.getIdName(object);
@@ -64,21 +68,15 @@ public class Delete implements IDelete {
 		}
 		
 		String query="DELETE FROM "+tableName+" where "+idName+"=?";
-		try {
+	
 		
-			if (value!=null) { 
-				logger.info(query);			
-				PreparedStatement ps=conn.getConnection().prepareStatement(query);
-				ps.setString(1, value);
-				ps.execute();
-				return true;
-			}
-			
-		} catch (SQLException ex) {	
-			logger.error(ex.getMessage(),ex.fillInStackTrace());
-			return false;
-			
-		}	
+		if (value!=null) { 
+			logger.info(query);			
+			PreparedStatement ps=conn.getConnection().prepareStatement(query);
+			ps.setString(1, value);
+			ps.execute();
+			return true;
+		}
 		
 		return false;
 		

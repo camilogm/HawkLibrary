@@ -16,7 +16,7 @@ public interface IInsert {
 	 * @return boolean if accepts the insert
 	 * @throws SQLException
 	 */
-	Boolean insert(Object object);
+	Boolean insert(Object object) throws SQLException;
 	
 	
 }

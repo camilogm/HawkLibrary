@@ -3,7 +3,6 @@ package sv.hawkframework.com.ORM.MySQLConverter;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 
@@ -13,6 +12,9 @@ import sv.hawkframework.com.ORM.QueryOperations.IFind;
 import sv.hawkframework.com.ORM.QueryOperations.IJsonConvert;
 import sv.hawkframework.com.ORM.Validations.PropertiesLoad;
 import sv.hawkframework.com.validators.NotFoundException;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.Logger;
+import sv.hawkframework.loggers.NoLogger;
 
 public class Find extends JsonConvert implements IFind {
 
@@ -20,7 +22,7 @@ public class Find extends JsonConvert implements IFind {
 	private static Find find;
 	protected IConstructortSelect constructorSelect = new ConstructorSelect();
 	protected IJsonConvert jsonConvert =new JsonConvert();
-	private static final Logger logger=Logger.getLogger(Find.class);
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
 	
 	private Find() {
 		
@@ -68,7 +70,6 @@ public class Find extends JsonConvert implements IFind {
 		
 		Object objectFind=null;
 		String jsonObject;
-		logger.info(query);
 		try {
 			jsonObject = jsonConvert.getArrayStringJson(query, object)[0];
 			

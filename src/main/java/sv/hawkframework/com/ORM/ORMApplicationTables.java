@@ -1,5 +1,8 @@
 package sv.hawkframework.com.ORM;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import sv.hawkframework.com.ORM.Interfaces.*;
@@ -25,14 +28,28 @@ public class  ORMApplicationTables<T> implements IOperations<Object>,IFindOperat
 	private IFindMany findMany = FindMany.getInstance();
 	private ICount count = Count.getInstance();
 	
-	
-	
-	
 	private T object;
 	
-	public ORMApplicationTables() {
+	@SuppressWarnings("unchecked")
+	public ORMApplicationTables(Class<? extends Object> classObject) {
 		
+		Constructor<?>[] gg = classObject.getDeclaredConstructors();
 		
+		for (Constructor<?> g : gg) { 
+			
+			 if (g.getGenericParameterTypes().length == 0) {
+				 try {
+					T newInstance = (T) g.newInstance();
+					this.object = newInstance;
+					
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+						| InvocationTargetException e) {
+					System.out.println("Error creating the instance");
+					System.out.println(e.getStackTrace());	
+				}
+				break;
+			 }
+		}
 	}
 	
 
@@ -76,21 +93,21 @@ public class  ORMApplicationTables<T> implements IOperations<Object>,IFindOperat
 	
 
 	@Override
-	public Boolean addAndSave() {
+	public Boolean addAndSave() throws SQLException {
 		
 		return insert.insert(object);
 	}
 
 
 	@Override
-	public void updateAndSave() {
+	public void updateAndSave() throws SQLException{
 		update.update(object);
 		
 	}
 
 
 	@Override
-	public Boolean deleteAndSave() {
+	public Boolean deleteAndSave() throws SQLException{
 		return delete.delete(object);
 		
 	}

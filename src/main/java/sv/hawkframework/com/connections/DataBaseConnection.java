@@ -1,4 +1,4 @@
-package sv.hawkframework.com.factory.connections;
+package sv.hawkframework.com.connections;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

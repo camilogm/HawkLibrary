@@ -8,18 +8,10 @@ public class LocaleClient {
 	 
 	 public static String getPathMessages() {
 		 
-		 String language="messages";
-		 String locale = "in";
-		 if (!locale.equals("es"))
-			 language=language+"_"+locale;
-
-		 try {
-			 return "src\\main\\java\\sv\\edu\\udb\\ORM\\Validations\\"+language+".properties";
-		 }
-		 catch (Exception e) {
-			 return "src\\main\\java\\sv\\edu\\udb\\ORM\\Validations\\messages.properties";
-		 }
-		 	 
+		 String path = System.getProperty("user.dir");
+		 path += "\\src\\main\\resources\\messages_es.properties";
+		 
+		 return path;
 	 }
 	 
 	 public static Locale getLocale() {		 

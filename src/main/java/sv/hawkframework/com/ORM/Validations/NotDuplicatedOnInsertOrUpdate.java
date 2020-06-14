@@ -31,7 +31,7 @@ public class NotDuplicatedOnInsertOrUpdate implements INotDuplicatedField{
 		 Class<? extends Object> classProperties = object.getClass();		 
 		 Field[] fields=classProperties.getDeclaredFields();
 		 Boolean auxiliar=false;
-		 NotDuplicatedException ex=new NotDuplicatedException("");
+		 NotDuplicatedException ex=new NotDuplicatedException("Valores duplicados");
 
 	    		
 		

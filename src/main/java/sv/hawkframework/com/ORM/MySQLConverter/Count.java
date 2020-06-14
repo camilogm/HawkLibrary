@@ -3,18 +3,21 @@ package sv.hawkframework.com.ORM.MySQLConverter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
 
 import sv.hawkframework.com.ORM.TablesDataProperties;
 import sv.hawkframework.com.ORM.QueryOperations.ICount;
-import sv.hawkframework.com.factory.connections.DataBaseConnection;
-import sv.hawkframework.com.factory.connections.MySqlConnection;
+import sv.hawkframework.com.connections.DataBaseConnection;
+import sv.hawkframework.com.connections.MySqlConnection;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.NoLogger;
+import sv.hawkframework.loggers.Logger;
 
 public class Count implements ICount {
 
 	private DataBaseConnection conn = MySqlConnection.getInstance();
-	private static final Logger logger=Logger.getLogger(Count.class);
 	private static Count count;
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
+
 	
 	private Count() {
 		

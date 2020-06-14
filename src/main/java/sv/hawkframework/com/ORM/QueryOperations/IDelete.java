@@ -1,5 +1,7 @@
 package sv.hawkframework.com.ORM.QueryOperations;
 
+import java.sql.SQLException;
+
 /**
  * 
  * @author camil_000
@@ -7,7 +9,7 @@ package sv.hawkframework.com.ORM.QueryOperations;
  */
 public interface IDelete {
 
-	Boolean delete(Object object);
+	Boolean delete(Object object) throws SQLException;
 
 	/**
 	 * 

@@ -1,7 +1,8 @@
 package sv.hawkframework.com.ORM.QueryOperations;
 
+import java.sql.SQLException;
 
 public interface IUpdate {
 	
-	Boolean update(Object object);
+	Boolean update(Object object) throws SQLException;
 }

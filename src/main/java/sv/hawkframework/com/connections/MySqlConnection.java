@@ -1,4 +1,4 @@
-package sv.hawkframework.com.factory.connections;
+package sv.hawkframework.com.connections;
 
 
 import java.io.FileReader;
@@ -9,13 +9,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+import sv.hawkframework.factorys.LoggerFactory;
+import sv.hawkframework.loggers.Logger;
+import sv.hawkframework.loggers.NoLogger;
 
 
 public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 
 
-	static final Logger logger = Logger.getLogger(MySqlConnection.class); 
+	private static final Logger logger = LoggerFactory.getLogger(null, NoLogger.class);
 	private static MySqlConnection mySqlConnection;
 	private  Connection connectionMysql;
 	
@@ -81,6 +83,7 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 	            connectionMysql.close();
 	            } 
 	        } catch (SQLException e) {
+	        	
 	            logger.error(e.getMessage(),e.fillInStackTrace());
 	      }
 		
