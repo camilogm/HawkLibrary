@@ -9,7 +9,7 @@ public class DeletePrueba {
 	public static void main(String[] args) { 
 		
 		ORMApplicationTables<Prueba> pruebaORM = new ORMApplicationTables<>(Prueba.class);
-		Prueba pr = new Prueba(19,null,null);
+		Prueba pr = new Prueba(19,null,null,null);
 		
 		pruebaORM.setObject(pr);
 		try {

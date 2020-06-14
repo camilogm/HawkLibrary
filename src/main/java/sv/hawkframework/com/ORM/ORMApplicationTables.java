@@ -1,5 +1,7 @@
 package sv.hawkframework.com.ORM;
 
+
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -63,32 +65,56 @@ public class  ORMApplicationTables<T> implements IOperations<Object>,IFindOperat
 	@SuppressWarnings("unchecked")
 	@Override
 	
-	public T find(Integer id)  {
-		return  (T) find.find(id, this.object);
+	public T find(Integer id) throws NullPointerException, SQLException  {
+		try {
+			return  (T) find.find(id, this.object);
+		} catch (NullPointerException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public T find(Integer id, String[] fields)  {
+	public T find(Integer id, String[] fields) throws NullPointerException,SQLException{
 
-		return (T) find.find(id, this.object, fields);
+		try {
+			return (T) find.find(id, this.object, fields);
+		} catch (NullPointerException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public T find(Object[][] conditions) {
+	public T find(Object[][] conditions)throws NullPointerException,SQLException{
 		
-		return (T) find.find(conditions, this.object);
+		try {
+			return (T) find.find(conditions, this.object);
+		} catch (NullPointerException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T find(Object[][] conditions, String[] fields){
+	public T find(Object[][] conditions, String[] fields) throws NullPointerException,SQLException{
 	
 		
-		return (T) find.find(conditions, this.object, fields);
+		try {
+			return (T) find.find(conditions, this.object, fields);
+		} catch (NullPointerException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 

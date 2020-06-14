@@ -9,7 +9,7 @@ public interface DataBaseConnection {
 	
 	Boolean  executeQuery(String query);
 	Boolean executeCall(String query);
-	Connection getConnection();
+	Connection getConnection() throws SQLException;
 	ResultSet readerCall(String query);
 	ResultSet executeReader(String query) throws SQLException,NullPointerException;
 	

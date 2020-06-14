@@ -1,8 +1,11 @@
 package sv.hawkframework.com;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import java.util.Scanner;
 import sv.hawkframework.com.ORM.ORMApplicationTables;
 import sv.hawkframework.com.validators.ErrorORM;
 import sv.hawkframework.com.validators.NotDuplicatedException;
@@ -13,23 +16,26 @@ public class ORMMain {
 	
 	public static void main (String[] args) { 
 		
-		Prueba prueba = pruebaORM.find(21);
-		Prueba otra = new Prueba(0,"WEY","nono");
-		prueba.setNombre("nono");
-		Object[][] conditions = null;
-		ArrayList<Prueba> pruebas = pruebaORM.findMany(conditions);
+		Scanner sca = new Scanner(System.in);
+		Boolean wea = true;
 		
-		for (Prueba pru : pruebas) {
-			System.out.println("prueba : "+pru.getNombre());
-		}
+		
+		
+		do {
+	
 		
 		try {
 			
-			pruebaORM.setObject(otra);
-			pruebaORM.addAndSave();
+			Prueba otra = new Prueba(21,"WEY","nono","wewe");
+			Object[][] conditions = null;
+			
+			System.out.println("el contador es: "+pruebaORM.getCount());
 		
-			pruebaORM.setObject(prueba);
-			pruebaORM.updateAndSave();
+			
+			pruebaORM.setObject(otra);
+			pruebaORM.updateAndSave();;
+		
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -41,7 +47,19 @@ public class ORMMain {
 				System.out.println(error.getField());
 				System.out.println(error.getMessage());
 			}
+		} catch (NullPointerException ex) {
+			System.out.println(ex.getStackTrace());	
 		}
+		
+		System.out.println("1 pa salir");
+		int d = sca.nextInt();
+		if (d==1) {
+			wea = false;
+		}
+		
+		
+		
+		}while(wea);
 		
 	}
 	

@@ -25,7 +25,7 @@ public class QuerysCheck {
 	 */
 	
 	public Boolean checkDuplicateValues(String idName,String tableName,
-			String fieldName,String fieldValue,String primaryKeyValue) throws SQLException {
+			String fieldName,String fieldValue,String primaryKeyValue) throws SQLException, NullPointerException {
 		
 		String query="SELECT "+idName+" FROM "+tableName+" where "+fieldName+"=?";	     
    		PreparedStatement ps;

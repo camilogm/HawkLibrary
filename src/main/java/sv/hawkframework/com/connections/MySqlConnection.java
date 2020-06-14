@@ -39,7 +39,6 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 				
 			}
 		} catch (SQLException e) {
-			System.out.println("erwa");
 		}
 	  	
 		return mySqlConnection;
@@ -67,26 +66,24 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 			
 			String url = host+"/"+database+"?"+"user="+user+"&"+"password="+password+"&"+extraParameters;
 			this.connectionMysql = DriverManager.getConnection(url);
+			logger.info("Conexion abierta" );
+			
 			
 		} catch (IOException | SQLException e) {
 			
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage());
+			e.fillInStackTrace();
+			return;
 		}
 		
 	}
 	
 
-	public void closeConnection() {
-		   try {
-	           
-	           if(connectionMysql != null){
-	            connectionMysql.close();
-	            } 
-	        } catch (SQLException e) {
-	        	
-	            logger.error(e.getMessage(),e.fillInStackTrace());
-	      }
-		
+	public void closeConnection() throws SQLException {
+		 
+       if(connectionMysql != null)
+        connectionMysql.close();
+	         
 	}
 
 	@Override
@@ -111,13 +108,23 @@ public class MySqlConnection  implements DataBaseConnection,AutoCloseable{
 
 	@Override
 	public ResultSet executeReader(String query) throws SQLException,NullPointerException {
+		if (this.connectionMysql==null || this.connectionMysql.isClosed())
+			this.openConnection();
+		
 		return this.connectionMysql.prepareStatement(query).executeQuery();
 	}
 
 
 	@Override
-	public Connection getConnection() {
+	public Connection getConnection() throws SQLException {
 	
+		if (this.connectionMysql!=null && this.connectionMysql.isClosed()) {
+			this.openConnection();
+		}
+		if (this.connectionMysql==null) {
+			this.openConnection();
+		}
+		
 		return this.connectionMysql;
       
 	}

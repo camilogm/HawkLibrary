@@ -44,15 +44,14 @@ public class Update  implements IUpdate  {
 	}
 	
 	@Override
-	public Boolean update(Object object) throws SQLException  {
+	public Boolean update(Object object) throws SQLException, NullPointerException  {
 		
 		   try {
-			notDuplicatedValidation.notDuplicatedValidationInsert(object, Boolean.TRUE);
+			   notDuplicatedValidation.notDuplicatedValidationInsert(object, Boolean.TRUE);
 			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
 					| InvocationTargetException | IOException | SQLException e) {
-
 				logger.error(e.getMessage(),e.fillInStackTrace());
-			}
+			} 
 		 
 		   JsonObject jsonObject= jsonConvert.jsonConvert(object); 
 	       String tableName=TablesDataProperties.getTableName(object);

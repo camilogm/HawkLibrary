@@ -26,7 +26,7 @@ public class NotDuplicatedOnInsertOrUpdate implements INotDuplicatedField{
 	@Override
 	public Boolean notDuplicatedValidationInsert(Object object, Boolean isUpdate) throws NoSuchMethodException, 
 	SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, FileNotFoundException,
-	IOException, SQLException {
+	IOException, SQLException , NullPointerException {
 		 
 		 Class<? extends Object> classProperties = object.getClass();		 
 		 Field[] fields=classProperties.getDeclaredFields();

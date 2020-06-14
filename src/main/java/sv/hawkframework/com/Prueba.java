@@ -1,5 +1,7 @@
 package sv.hawkframework.com;
 
+import com.google.gson.annotations.SerializedName;
+
 import sv.hawkframework.com.ORM.Annotations.DataModelAnnotations;
 import sv.hawkframework.com.ORM.Annotations.NotDuplicated;
 import sv.hawkframework.com.ORM.Annotations.PrimaryKey;
@@ -13,14 +15,17 @@ public class Prueba {
 	private String codigo;
 	@NotDuplicated
 	private String nombre;
+	@SerializedName("prueba_campo")
+	private String pruebaCampo;
 	
 	public Prueba() {
 		
 	}
-	public Prueba(Integer id, String codigo, String nombre) {
+	public Prueba(Integer id, String codigo, String nombre,String pruebaCampo) {
 		this.id = id;
 		this.codigo = codigo;
 		this.nombre = nombre;
+		this.pruebaCampo = pruebaCampo;
 	}
 	
 	public Integer getId() {
@@ -41,6 +46,14 @@ public class Prueba {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	public String getPruebaCampo() {
+		return pruebaCampo;
+	}
+	public void setPruebaCampo(String pruebaCampo) {
+		this.pruebaCampo = pruebaCampo;
+	}
+	
+	
 	
 	
 	

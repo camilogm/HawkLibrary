@@ -1,5 +1,7 @@
 package sv.hawkframework.com.ORM.QueryOperations;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public interface IFind {
@@ -12,7 +14,7 @@ public interface IFind {
 	 * @throws SQLException
 	 * @throws NullPointerException
 	 */
-	Object find(Integer id,Object object);
+	Object find(Integer id,Object object) throws NullPointerException, FileNotFoundException, SQLException, IOException ;
 	/**
 	 * 
 	 * @param id
@@ -22,7 +24,7 @@ public interface IFind {
 	 * @throws SQLException
 	 * @throws NullPointerException
 	 */
-	Object find(Integer id,Object object, String fields[]);
+	Object find(Integer id,Object object, String fields[]) throws NullPointerException, FileNotFoundException, SQLException, IOException ;
 	/**
 	 * 
 	 * @param conditions
@@ -31,7 +33,7 @@ public interface IFind {
 	 * @throws SQLException
 	 * @throws NullPointerException
 	 */
-	Object find(Object[][] conditions,Object object);
+	Object find(Object[][] conditions,Object object) throws NullPointerException, FileNotFoundException, SQLException, IOException ;
 	/**
 	 * 
 	 * @param conditions
@@ -41,6 +43,6 @@ public interface IFind {
 	 * @throws SQLException
 	 * @throws NullPointerException
 	 */
-	Object find(Object[][] conditions,Object object, String fields[]);
+	Object find(Object[][] conditions,Object object, String fields[]) throws NullPointerException, FileNotFoundException, SQLException, IOException ;
 	
 }
