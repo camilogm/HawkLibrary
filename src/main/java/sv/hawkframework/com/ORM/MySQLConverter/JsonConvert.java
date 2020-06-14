@@ -4,11 +4,7 @@ package sv.hawkframework.com.ORM.MySQLConverter;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-
-
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
+import java.util.ArrayList;
 
 import sv.hawkframework.com.ORM.QueryOperations.IJsonConvert;
 import sv.hawkframework.com.ORM.Validations.ValidationTypes;
@@ -22,56 +18,43 @@ public class JsonConvert  implements IJsonConvert {
 	protected IValidationTypes validationTypes = new  ValidationTypes();
 	
 	
-	@Override
-	public JsonObject jsonConvert(Object object) throws JsonIOException {
-		 Gson gson = new Gson();
-	     String jsonString = gson.toJson(object);
-	     JsonObject jsonObject = new Gson().fromJson(jsonString, JsonObject.class);            
-	     return jsonObject;
-		
-	}
+
 
 	@Override
-	public String[] getArrayStringJson(String query,Object object) throws SQLException,NullPointerException {
+	public ArrayList<Object> getArrayStringJson(String query,Object object) throws SQLException,NullPointerException {
 		
-		 String[] obs = null;
-
-		 ResultSet rs=connection.executeReader(query);
-		 ResultSetMetaData rsmd = rs.getMetaData();
-         int columnsNum=rsmd.getColumnCount();
-         rs.last();
-         int numRows = rs.getRow();
+		 ArrayList<Object> pairs = new ArrayList<>();
+		 
+		 
+		 
+		 ResultSet resultSet=connection.executeReader(query);
+		 ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+		 
+         int columnsNum=resultSetMetaData.getColumnCount();
+         resultSet.last();
+         int numRows = resultSet.getRow();
+        
          if(numRows == 0){
              numRows =1;
-             obs = new String[numRows];
-             obs[0] = null;
+             return null;
          }
-         obs = new String[numRows];
-         rs.beforeFirst();
          
-         int j=0;
+         resultSet.beforeFirst();  
          System.out.println(query);
-         while (rs.next()){
+         while (resultSet.next()){
              
-             String jsonObjectString="{";
              for (int i = 1; i <= columnsNum; i++) {
             
-               String key=rsmd.getColumnName(i);                      
-               String jsonField="\""+key+"\":";
-               String value=rs.getString(i);
-               value=this.validationTypes.getValue(value);
-               jsonField+=value+"";
-               jsonObjectString+=jsonField+",";
-                 
+               String key=resultSetMetaData.getColumnName(i); 
+               String typeOf = resultSetMetaData.getColumnClassName(i);
+               String value=resultSet.getString(i);
+             
+               PairObjects pair = new PairObjects(key, value,typeOf);
+               pairs.add(pair);                    
              }
-           jsonObjectString=jsonObjectString.substring(0,jsonObjectString.length()-1);
-           jsonObjectString+="}";
-           
-           obs[j] = jsonObjectString;
-           j++;
          }
 
-         return obs;
+         return pairs;
 				
 	}
 

@@ -2,9 +2,7 @@ package sv.hawkframework.com.ORM.MySQLConverter;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
-
-import com.google.gson.Gson;
+import java.util.ArrayList;
 
 import sv.hawkframework.com.ORM.TablesDataProperties;
 import sv.hawkframework.com.ORM.QueryOperations.IConstructortSelect;
@@ -69,18 +67,16 @@ public class Find extends JsonConvert implements IFind {
 	private Object convertToObject(Object object,String query) {
 		
 		Object objectFind=null;
-		String jsonObject;
+		ArrayList<Object> pairs;
 		try {
-			jsonObject = jsonConvert.getArrayStringJson(query, object)[0];
-			
-			if (jsonObject==null){
+			pairs = jsonConvert.getArrayStringJson(query, object);
+		
+			if (pairs==null) {
 				String message;
 				message=PropertiesLoad.getProperty("NotFound");
 				NotFoundException ex=new NotFoundException(message+" "+TablesDataProperties.getTableName(object));
 				throw ex;
 			}
-			
-			
 			
 			Gson gson = new Gson();
 		    objectFind=gson.fromJson(jsonObject, object.getClass());

@@ -1,14 +1,12 @@
 package sv.hawkframework.com.ORM.QueryOperations;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import com.google.gson.JsonObject;
 
 public interface IJsonConvert {
 
-	
-	JsonObject jsonConvert(Object object);
-	String[] getArrayStringJson(String query,Object object) throws SQLException;
+	ArrayList<Object> getArrayStringJson(String query,Object object) throws SQLException;
 	String getStringJsonArray(String query, Object object);
 	
 	

@@ -33,13 +33,13 @@ public class  ORMApplicationTables<T> implements IOperations<Object>,IFindOperat
 	@SuppressWarnings("unchecked")
 	public ORMApplicationTables(Class<? extends Object> classObject) {
 		
-		Constructor<?>[] gg = classObject.getDeclaredConstructors();
+		Constructor<?>[] constructors = classObject.getDeclaredConstructors();
 		
-		for (Constructor<?> g : gg) { 
+		for (Constructor<?> constructor : constructors) { 
 			
-			 if (g.getGenericParameterTypes().length == 0) {
+			 if (constructor.getGenericParameterTypes().length == 0) {
 				 try {
-					T newInstance = (T) g.newInstance();
+					T newInstance = (T) constructor.newInstance();
 					this.object = newInstance;
 					
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException

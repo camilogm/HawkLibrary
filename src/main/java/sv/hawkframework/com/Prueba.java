@@ -13,6 +13,7 @@ public class Prueba {
 	private String codigo;
 	@NotDuplicated
 	private String nombre;
+	private String wea;
 	
 	public Prueba() {
 		
@@ -40,6 +41,12 @@ public class Prueba {
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public String getWea() {
+		return wea;
+	}
+	public void setWea(String wea) {
+		this.wea = wea;
 	}
 	
 	

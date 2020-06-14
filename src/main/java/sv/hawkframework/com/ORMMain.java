@@ -21,6 +21,7 @@ public class ORMMain {
 		
 		for (Prueba pru : pruebas) {
 			System.out.println("prueba : "+pru.getNombre());
+			System.out.println("prueba : "+pru.getWea());
 		}
 		
 		try {
